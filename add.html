@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .balloons {
+            position: absolute;
+            width: 100%;
+            top: 100%;
+            animation: rise 5s linear infinite;
+        }
+        @keyframes rise {
+            0% { top: 100%; }
+            100% { top: -10%; }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: yellow;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday! 🎂</h1>
+    <audio autoplay loop>
+        <source src="your-music-file.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        // Generate random confetti
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * 100 + "vw";
+                confetti.style.backgroundColor = ["red", "blue", "yellow", "green", "purple"][Math.floor(Math.random() * 5)];
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(confetti);
+            }
+        }
+        createConfetti();
+    </script>
+</body>
+</html>
