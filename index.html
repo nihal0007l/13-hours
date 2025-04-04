@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Honey!</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffccff;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            max-width: 500px;
+            position: relative;
+        }
+        h1 {
+            color: #ff3399;
+        }
+        .hidden-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+            border: 2px solid #ff3399;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #fff0f5;
+            text-align: left;
+            animation: glow 1.5s infinite alternate;
+        }
+        .btn {
+            background-color: #ff3399;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0px 0px 10px rgba(255, 51, 153, 0.8);
+            transition: transform 0.2s;
+            position: relative;
+        }
+        .btn:hover {
+            background-color: #cc0077;
+            transform: scale(1.1);
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0px 0px 10px rgba(255, 51, 153, 0.8); }
+            100% { box-shadow: 0px 0px 20px rgba(255, 51, 153, 1); }
+        }
+        @keyframes balloons {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            background-color: red;
+            border-radius: 50%;
+            left: calc(10% + 80% * var(--i));
+            animation: balloons 6s ease-in-out infinite;
+        }
+        .firework {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: gold;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: explode 1s ease-out forwards;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop>
+        <source src="https://www.myinstants.com/media/sounds/teenage-mutant.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="container">
+        <h1>🎉 Happy Birthday, Honey! 🎉</h1>
+        <p>From Tihu Badmosh 💖</p>
+        <img src="https://i.imgur.com/w3h6z6O.gif" alt="Birthday Cake"> 
+        <button class="btn" onclick="showMessage()">Click for a Surprise! 🎁</button>
+        <p id="message" class="hidden-message"></p>
+    </div>
+    <script>
+        function showMessage() {
+            let text = "I don't know why the fuck I am doing this but a special happy birthday from a stranger whom you never met, but had a significant connection. I don't know why we stopped talking but it was ahhhhh good memory. I don't talk to anyone first but that day was special when I messaged you for the first time—20th October at 7:36 p.m. The moment when I got a message from you took me to a heart attack, I think so.\n\nI don't know why I am unlucky in all my life in everything.\n\nI never show any effort for anyone and I never wanted to, but I don't know why I showed effort for you. I even don't care about anyone.\n\nAnd just this, I want to end—I never know how you would recognize me, but if you do, then it would be great!\n\nMy favorite emoji: 😊\n\nMy favorite word by you: \"Bas\"\n\nAt last, Happy Birthday To You! 🎂";
+            let i = 0;
+            let messageBox = document.getElementById('message');
+            messageBox.style.display = 'block';
+            messageBox.innerHTML = '';
+            function typeEffect() {
+                if (i < text.length) {
+                    messageBox.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeEffect, 50);
+                }
+            }
+            typeEffect();
+            createFireworks();
+        }
+        function createFireworks() {
+            for (let i = 0; i < 20; i++) {
+                let firework = document.createElement('div');
+                firework.classList.add('firework');
+                firework.style.top = `${Math.random() * 100}vh`;
+                firework.style.left = `${Math.random() * 100}vw`;
+                document.body.appendChild(firework);
+                setTimeout(() => { firework.remove(); }, 1000);
+            }
+        }
+        for (let i = 0; i < 10; i++) {
+            let balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.style.setProperty('--i', Math.random());
+            document.body.appendChild(balloon);
+        }
+    </script>
+</body>
+</html>
