@@ -16,47 +16,47 @@
             color: white;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
-        .balloons {
+        .photo {
             position: absolute;
-            width: 100%;
-            top: 100%;
-            animation: rise 5s linear infinite;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            animation: float 5s linear infinite;
         }
-        @keyframes rise {
-            0% { top: 100%; }
-            100% { top: -10%; }
-        }
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: yellow;
-            animation: fall 4s linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-100px); }
-            100% { transform: translateY(100vh); }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-200px); opacity: 0; }
         }
     </style>
 </head>
 <body>
     <h1>🎉 Happy Birthday! 🎂</h1>
-    <audio autoplay loop>
+    <audio id="bg-music" autoplay loop>
         <source src="your-music-file.mp3" type="audio/mpeg">
     </audio>
     <script>
-        // Generate random confetti
-        function createConfetti() {
-            for (let i = 0; i < 50; i++) {
-                let confetti = document.createElement("div");
-                confetti.className = "confetti";
-                confetti.style.left = Math.random() * 100 + "vw";
-                confetti.style.backgroundColor = ["red", "blue", "yellow", "green", "purple"][Math.floor(Math.random() * 5)];
-                confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-                document.body.appendChild(confetti);
-            }
+        function createPhoto(x, y) {
+            const img = document.createElement("img");
+            img.src = "your-photo-url.jpg"; // Replace with actual photo URL
+            img.className = "photo";
+            img.style.left = x + "px";
+            img.style.top = y + "px";
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), 5000);
         }
-        createConfetti();
+        
+        document.body.addEventListener("click", (e) => {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createPhoto(e.clientX + (Math.random() * 100 - 50), e.clientY + (Math.random() * 100 - 50));
+                }, i * 300);
+            }
+        });
+
+        // Ensure music auto-plays on mobile
+        document.body.addEventListener('click', function() {
+            document.getElementById('bg-music').play();
+        });
     </script>
 </body>
 </html>
